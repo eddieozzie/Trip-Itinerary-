@@ -17,24 +17,33 @@ class PreferencesController < ApplicationController
 		#iterate over keys in map, if preference is in map, append key to list 'activities'
 		categories = {"airsoft" => ["shooting", "action", "airsoft"], "amusementparks" => ["action", "amusement parks", "family activities"], "aquariums" => ["fish", "family activities"], "archery" => ["archery"], "beaches" => ["fish", "beaches", "family activities", "water activities"], "bicyclepaths" => ["biking", "exercise"], "boating" => ["boating", "exercise", "water activities"], "climbing" => ["exercise", "climbing", "action"], "scuba" => ["water activities", "exercise", "fish", "action", "scuba diving", "nature"], "fishing" => ["water activities", "fish", "family activities", "fishing", "nature"], "golf" => ["golf"], "hiking" => ["hiking", "nature"], "nudist" => ["adult activities", "nudist"], "parasailing" => ["parasailing", "action", "water activities"], "rafting" => ["exercise", "water activities", "rafting/kayaking"], "skiing" => ["action", "winter activities", "skiing"], "skydiving" => ["action"], "waterparks" => ["action", "amusement parks", "family activities", "water activities"], "museums" => ["family activities", "museums"], "sportsteams" => ["professional sports", "family activities"], "eroticmassage" => ["adult activities"], "weddingchappels" => ["wedding"], "venues" => ["wedding"], "cannabisdispensaries" => ["recreational marijuana"], "adultentertainment" => ["adult activities"], "riceshop" => ["rice"]}
 		activities = Set.new []
-		category1 = params['p1']
-		category2 = params['p2']
-		category3 = params['p3']
+		#category1 = params['p1']
+		#category2 = params['p2']
+		#category3 = params['p3']
 		specified_city = params['specified_city']
 		hubs = ["new+york", "los+angeles","houston", "chicago"]
 
+		preferences_copy = params["preferences"]["categories"]
+		preferences = []
+		
+
+
+		preferences_copy.each do |preference|
+			if preference != ""
+				preferences << preference
+			end	
+		end	
+		@preferences = preferences	
+
+
 		categories.keys.each do |category|
+			preferences.each do |preference|
 			
-			if categories[category].include? category1  
-				activities.add(category)
+				if categories[category].include? preference  
+					activities.add(category)
 
-			elsif categories[category].include? category2 
-				activities.add(category)
-
-			elsif categories[category].include? category3 
-				activities.add(category) 
+				end
 			end
-
 		end 
 
 		activities.each do |activity|
@@ -45,11 +54,11 @@ class PreferencesController < ApplicationController
 				limit = 12 / activities.length
 			end
 			
-		#uri = URI("https://api.yelp.com/v2/search/?oauth_consumer_key=amEkK6sGLXqfjenxefspjQ&oauth_token=JiU_ckw_JBoRtjsD6c12enZrvvgYDuV5&oauth_signature_method=HMAC-SHA1&oauth_signature=GPJ842OeLIbiY-kvMJKQ56KVBlQ&oauth_timestamp=1476549110&oauth_nonce&location=Houston&sort=2&limit=5&category_filter=food")			
-		#uri = URI("https://api.yelp.com/v2/search/?oauth_nonce=kYjzVBB8Y0ZFabxSWbWovY3uYSQ2pTgmZeNu2VS4cg&oauth_consumer_key=amEkK6sGLXqfjenxefspjQ&oauth_token=_iZ4KaMzE1dWZx3N4_l2ULyFu8M-Bh_6&oauth_signature_method=HMAC-SHA1&oauth_signature=Ve-G1qysc3ip9XdAzA8vH9durBI&oauth_timestamp=1476551697&location=Houston&category_filter=food")
-		#response = Net::HTTP.get(uri) 
+			#uri = URI("https://api.yelp.com/v2/search/?oauth_consumer_key=amEkK6sGLXqfjenxefspjQ&oauth_token=JiU_ckw_JBoRtjsD6c12enZrvvgYDuV5&oauth_signature_method=HMAC-SHA1&oauth_signature=GPJ842OeLIbiY-kvMJKQ56KVBlQ&oauth_timestamp=1476549110&oauth_nonce&location=Houston&sort=2&limit=5&category_filter=food")			
+			#uri = URI("https://api.yelp.com/v2/search/?oauth_nonce=kYjzVBB8Y0ZFabxSWbWovY3uYSQ2pTgmZeNu2VS4cg&oauth_consumer_key=amEkK6sGLXqfjenxefspjQ&oauth_token=_iZ4KaMzE1dWZx3N4_l2ULyFu8M-Bh_6&oauth_signature_method=HMAC-SHA1&oauth_signature=Ve-G1qysc3ip9XdAzA8vH9durBI&oauth_timestamp=1476551697&location=Houston&category_filter=food")
+			#response = Net::HTTP.get(uri) 
 
-		#hash = JSON.parse response
+			#hash = JSON.parse response
 		
 		
 
@@ -80,9 +89,11 @@ class PreferencesController < ApplicationController
 
 
 				end	
+			end
 
+		
 
-		end
+	
 
 		#load locations in database
 		@locations = Location.all
