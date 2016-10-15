@@ -15,11 +15,13 @@ class PreferencesController < ApplicationController
 
 		Location.destroy_all
 		#iterate over keys in map, if preference is in map, append key to list 'activities'
-		categories = {"airsoft" => ["shooting", "action", "airsoft"], "amusementparks" => ["action", "amusement parks", "family activities"], "aquariums" => ["fish", "family activities"], "archery" => ["Archery"], "beaches" => ["fish", "beaches", "family activities", "water activities"], "bicyclepaths" => ["biking", "exercise"], "boating" => ["boating", "exercise", "water activities"], "climbing" => ["exercise", "climbing", "action"], "scuba" => ["water activities", "exercise", "fish", "action", "scuba diving", "nature"], "fishing" => ["water activities", "fish", "family activities", "fishing", "nature"], "golf" => ["golf"], "hiking" => ["hiking", "nature"], "nudist" => ["adult activities", "nudist"], "parasailing" => ["parasailing", "action", "water activities"], "rafting" => ["exercise", "water activities", "rafting/kayaking"], "skiing" => ["action", "winter activities", "skiing"], "skydiving" => ["action"], "waterparks" => ["action", "amusement parks", "family activities", "water activities"], "museums" => ["family activities", "museums"], "sportsteams" => ["professional sports", "family activities"], "eroticmassage" => ["adult activities"], "weddingchappels" => ["wedding"], "venues" => ["wedding"], "cannabisdispensaries" => ["recreational marijuana"], "adultentertainment" => ["adult activities"], "riceshop" => ["rice"]}
+		categories = {"airsoft" => ["shooting", "action", "airsoft"], "amusementparks" => ["action", "amusement parks", "family activities"], "aquariums" => ["fish", "family activities"], "archery" => ["archery"], "beaches" => ["fish", "beaches", "family activities", "water activities"], "bicyclepaths" => ["biking", "exercise"], "boating" => ["boating", "exercise", "water activities"], "climbing" => ["exercise", "climbing", "action"], "scuba" => ["water activities", "exercise", "fish", "action", "scuba diving", "nature"], "fishing" => ["water activities", "fish", "family activities", "fishing", "nature"], "golf" => ["golf"], "hiking" => ["hiking", "nature"], "nudist" => ["adult activities", "nudist"], "parasailing" => ["parasailing", "action", "water activities"], "rafting" => ["exercise", "water activities", "rafting/kayaking"], "skiing" => ["action", "winter activities", "skiing"], "skydiving" => ["action"], "waterparks" => ["action", "amusement parks", "family activities", "water activities"], "museums" => ["family activities", "museums"], "sportsteams" => ["professional sports", "family activities"], "eroticmassage" => ["adult activities"], "weddingchappels" => ["wedding"], "venues" => ["wedding"], "cannabisdispensaries" => ["recreational marijuana"], "adultentertainment" => ["adult activities"], "riceshop" => ["rice"]}
 		activities = Set.new []
 		category1 = params['p1']
 		category2 = params['p2']
 		category3 = params['p3']
+		specified_city = params['specified_city']
+		hubs = ["new+york", "los+angeles","houston", "chicago"]
 
 		categories.keys.each do |category|
 			
@@ -51,28 +53,33 @@ class PreferencesController < ApplicationController
 		
 		
 
-		consumer = OAuth::Consumer.new( CONSUMER_KEY,SECRET, {:site => "http://api.yelp.com", :signature_method => "HMAC-SHA1", :scheme => :query_string})
+			consumer = OAuth::Consumer.new( CONSUMER_KEY,SECRET, {:site => "http://api.yelp.com", :signature_method => "HMAC-SHA1", :scheme => :query_string})
 
-		access_token = OAuth::AccessToken.new( consumer, TOKEN,TOKEN_SECRET)
+			access_token = OAuth::AccessToken.new( consumer, TOKEN,TOKEN_SECRET)
 
-		#hash = access_token.get("/v2/search?location=new+york").
+			#hash = access_token.get("/v2/search?location=new+york").
 
-		hash = JSON.parse(access_token.get("/v2/search?location=new+york").body)
+			if specified_city != ""
+				hash = JSON.parse(access_token.get("/v2/search?location=#{specified_city}&limit=#{limit}&category_filter=#{activity}").body)
+			else
+				location = hubs[Random.rand(4)]
+				hash = JSON.parse(access_token.get("/v2/search?location=#{location}&limit=#{limit}&category_filter=#{activity}").body)	
+			end
 
-		businesses = hash["businesses"]
+			businesses = hash["businesses"]
 
-			businesses.each do |business|
+				businesses.each do |business|
 
-				name = business["name"]
-				url = business["url"]
-				rating = business["rating"]
-				city = business["location"]["city"]
-				description = business["snippet_text"]
+					name = business["name"]
+					url = business["url"]
+					rating = business["rating"]
+					city = business["location"]["city"]
+					description = business["snippet_text"]
 
-				Location.create(title:name, url: url, yelp_rating:rating, city:city, description:description)
+					Location.create(title:name, url: url, yelp_rating:rating, city:city, description:description)
 
 
-			end	
+				end	
 
 
 		end

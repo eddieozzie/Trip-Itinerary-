@@ -2,6 +2,13 @@
 <html>
   <head>
     <title>ItineraryApp</title>
+    
+    <script async defer type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+	<%= javascript_include_tag "application" %>
+
+	 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCGPrtYN-43sx1K9TTu_xYrmNQguZ-wTp0&callback=initMap" type="text/javascript"></script>
+
+
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
