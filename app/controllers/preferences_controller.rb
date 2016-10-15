@@ -96,7 +96,7 @@ class PreferencesController < ApplicationController
 
 		#load locations in database
 		#@locations = Location.all.sort_by!(yelp_rating)
-		@locations = Location.order((:yelp_rating *-1))
+		@locations = Location.order(yelp_rating: :desc)
 
 	end
 end
