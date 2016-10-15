@@ -48,11 +48,8 @@ class PreferencesController < ApplicationController
 
 		activities.each do |activity|
 
-			if activities.length > 12
-				limit = 1
-			else 
-				limit = 12 / activities.length
-			end
+			limit = (24.0 / activities.length).ceil
+			#end
 			
 			#uri = URI("https://api.yelp.com/v2/search/?oauth_consumer_key=amEkK6sGLXqfjenxefspjQ&oauth_token=JiU_ckw_JBoRtjsD6c12enZrvvgYDuV5&oauth_signature_method=HMAC-SHA1&oauth_signature=GPJ842OeLIbiY-kvMJKQ56KVBlQ&oauth_timestamp=1476549110&oauth_nonce&location=Houston&sort=2&limit=5&category_filter=food")			
 			#uri = URI("https://api.yelp.com/v2/search/?oauth_nonce=kYjzVBB8Y0ZFabxSWbWovY3uYSQ2pTgmZeNu2VS4cg&oauth_consumer_key=amEkK6sGLXqfjenxefspjQ&oauth_token=_iZ4KaMzE1dWZx3N4_l2ULyFu8M-Bh_6&oauth_signature_method=HMAC-SHA1&oauth_signature=Ve-G1qysc3ip9XdAzA8vH9durBI&oauth_timestamp=1476551697&location=Houston&category_filter=food")
@@ -77,16 +74,18 @@ class PreferencesController < ApplicationController
 
 			businesses = hash["businesses"]
 
-				businesses.each do |business|
+				if businesses != nil
 
-					name = business["name"]
-					url = business["url"]
-					rating = business["rating"]
-					city = business["location"]["city"]
-					description = business["snippet_text"]
+					businesses.each do |business|
 
-					Location.create(title:name, url: url, yelp_rating:rating, city:city, description:description)
+						name = business["name"]
+						url = business["url"]
+						rating = business["rating"]
+						city = business["location"]["city"]
+						description = business["snippet_text"]
 
+						Location.create(title:name, url: url, yelp_rating:rating, city:city, description:description)
+					end
 
 				end	
 			end
@@ -96,7 +95,8 @@ class PreferencesController < ApplicationController
 	
 
 		#load locations in database
-		@locations = Location.all
+		#@locations = Location.all.sort_by!(yelp_rating)
+		@locations = Location.order((:yelp_rating *-1))
 
 	end
 end
