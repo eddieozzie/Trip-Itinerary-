@@ -1,0 +1,34 @@
+<html>
+
+<head>
+</head>
+
+<body>
+	<table>
+		<tr>
+			<th>Title</th>
+			<th>Yelp Rating</th>
+			<th>City</th>
+			<th>Description</th>
+		</tr>
+
+
+		<%=@locations.count%>
+
+		<%@locations.each do |location|%>
+
+
+			<tr>
+				<td><%=location.title%></td>
+				<td><%=location.yelp_rating%></td>
+				<td><%=location.city%></td>
+				<td><%=location.description%></td>
+			</tr>
+
+		<%end%>
+
+
+	</table>
+</body>
+
+</html>
