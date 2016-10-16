@@ -28,9 +28,7 @@
 			margin: -225px 0 -50px 0;
 		}
 		body{
-			
-			background-color: green;
-			background-image: url("../tan_color.jpg")
+			background-image: "../../assets/images/;
 		}
 	
 	</style>
@@ -53,66 +51,82 @@
 
 	<p>Please enter your preferences</p>
 	
-	<div class="mid_background">
 
-		<form action="show_results">
-			City: <input type="text" name="specified_city" placeholder="optional">
+	<form action="show_results">
+		City: <input type="text" name="specified_city" placeholder="optional">
+		<br>
+		<div class="col">
 			<br>
-			<div class="col">
-				<br>
 
-				Family Activities: <%=check_box("preferences", "categories", {:multiple => true}, "family activities", nil)%>
-				<br>
-				Museums: <%=check_box("preferences", "categories", {:multiple => true}, "museums", nil)%>
-				<br>
-				Rice: <%=check_box("preferences", "categories", {:multiple => true}, "rice", nil)%>
-				<br>
-				
-				Exercise: <%=check_box("preferences", "categories", {:multiple => true}, "exercise", nil)%>
-				<br>
-				Water Activities: <%=check_box("preferences", "categories", {:multiple => true}, "water activities", nil)%>
-				<br>
-				Rafting/Kayaking: <%=check_box("preferences", "categories", {:multiple => true}, "rafting/kayaking", nil)%>
-				<br>
-				Climbing: <%=check_box("preferences", "categories", {:multiple => true}, "climbing", nil)%>
-				<br>
-				Boating: <%=check_box("preferences", "categories", {:multiple => true}, "boating", nil)%>
-				<br>
-				Aquariums: <%=check_box("preferences", "categories", {:multiple => true}, "fish", nil)%>
-				<br>
-				Nature: <%=check_box("preferences", "categories", {:multiple => true}, "nature", nil)%>
-				<br>
-				Golf: <%=check_box("preferences", "categories", {:multiple => true}, "golf", nil)%>
-				<br>
-				Beaches: <%=check_box("preferences", "categories", {:multiple => true}, "beaches", nil)%>
-				<br>
-				Wedding: <%=check_box("preferences", "categories", {:multiple => true}, "wedding", nil)%>
-				<br>
-				Amusement Parks: <%=check_box("preferences", "categories", {:multiple => true}, "amusement parks", nil)%>
-				<br>
-				Shooting: <%=check_box("preferences", "categories", {:multiple => true}, "shooting", nil)%>
-				<br>
-				Archery: <%=check_box("preferences", "categories", {:multiple => true}, "archery", nil)%>
-				<br>
-				Hiking: <%=check_box("preferences", "categories", {:multiple => true}, "hiking", nil)%>
-				<br>
-				Professional Sports: <%=check_box("preferences", "categories", {:multiple => true}, "professional sports", nil)%>
-				<br>
-				
-			</div>
-
+			Family Activities: <%=check_box("preferences", "categories", {:multiple => true}, "family activities", nil)%>
 			<br>
-			<!--<button type="submit" action="show_results">Submit</button>-->
+			Museums: <%=check_box("preferences", "categories", {:multiple => true}, "museums", nil)%>
+			<br>
+			Rice: <%=check_box("preferences", "categories", {:multiple => true}, "rice", nil)%>
+			<br>
+			Action: <%=check_box("preferences", "categories", {:multiple => true}, "action", nil)%>
+			<br>
+			Adult Activities: <%=check_box("preferences", "categories", {:multiple => true}, "adult activities", nil)%>
+			<br>
+			Nudist: <%=check_box("preferences", "categories", {:multiple => true}, "nudist", nil)%>
+			<br>
+			Exercise: <%=check_box("preferences", "categories", {:multiple => true}, "exercise", nil)%>
+			<br>
+			Water Activities: <%=check_box("preferences", "categories", {:multiple => true}, "water activities", nil)%>
+			<br>
+			Rafting/Kayaking: <%=check_box("preferences", "categories", {:multiple => true}, "rafting/kayaking", nil)%>
+			<br>
+			Climbing: <%=check_box("preferences", "categories", {:multiple => true}, "climbing", nil)%>
+			<br>
+			Boating: <%=check_box("preferences", "categories", {:multiple => true}, "boating", nil)%>
+			<br>
+			Aquariums: <%=check_box("preferences", "categories", {:multiple => true}, "fish", nil)%>
+			<br>
+			Nature: <%=check_box("preferences", "categories", {:multiple => true}, "nature", nil)%>
+			<br>
+			Golf: <%=check_box("preferences", "categories", {:multiple => true}, "golf", nil)%>
+			<br>
+			Beaches: <%=check_box("preferences", "categories", {:multiple => true}, "beaches", nil)%>
+			<br>
+			Recreational Marijuana: <%=check_box("preferences", "categories", {:multiple => true}, "recreational marijuana", nil)%>
+			<br>
+			Wedding: <%=check_box("preferences", "categories", {:multiple => true}, "wedding", nil)%>
+			<br>
+			Amusement Parks: <%=check_box("preferences", "categories", {:multiple => true}, "amusement parks", nil)%>
+			<br>
+			Winter Activities: <%=check_box("preferences", "categories", {:multiple => true}, "winter activies", nil)%>
+			<br>
+			Skiing: <%=check_box("preferences", "categories", {:multiple => true}, "skiing", nil)%>
+			<br>
+			Shooting: <%=check_box("preferences", "categories", {:multiple => true}, "shooting", nil)%>
+			<br>
+			Airsoft: <%=check_box("preferences", "categories", {:multiple => true}, "airsoft", nil)%>
+			<br>
+			Archery: <%=check_box("preferences", "categories", {:multiple => true}, "archery", nil)%>
+			<br>
+			Scuba Diving: <%=check_box("preferences", "categories", {:multiple => true}, "scuba diving", nil)%>
+			<br>
+			Biking: <%=check_box("preferences", "categories", {:multiple => true}, "biking", nil)%>
+			<br>
+			Hiking: <%=check_box("preferences", "categories", {:multiple => true}, "hiking", nil)%>
+			<br>
+			Professional Sports: <%=check_box("preferences", "categories", {:multiple => true}, "professional sports", nil)%>
+			<br>
+			Parasailing: <%=check_box("preferences", "categories", {:multiple => true}, "parasailing", nil)%>
+			<br>
+		</div>
 
-			<div class="container center">
-	              <button type="submit" class="btn btn-info" action="show_results">
-	                <span class="glyphicon glyphicon-search"></span>
-	                Start your vacation!
-	                </button>  
-	        </div>
+		<br>
+		<!--<button type="submit" action="show_results">Submit</button>-->
 
-		</form>
-	</div>
+		<div class="container center">
+              <button type="submit" class="btn btn-info" action="show_results">
+                <span class="glyphicon glyphicon-search"></span>
+                Start your vacation!
+                </button>  
+        </div>
+
+	</form>
 
 </body>
 

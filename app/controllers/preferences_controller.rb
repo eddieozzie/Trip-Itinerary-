@@ -7,6 +7,8 @@ class PreferencesController < ApplicationController
 	TOKEN = "dBXdYpzF9pRe6ML4EqnAtrvkEWxcGxq2"
 	TOKEN_SECRET = "tOE-UZfaD58RfJwgOrKkevN-2hY"
 
+	GOOGLE_KEY = "AIzaSyAMrSWgcikFHJmslnrC_N25fJ9Wv-988iI"
+
 	def index
 	end
 	
@@ -17,9 +19,7 @@ class PreferencesController < ApplicationController
 		#iterate over keys in map, if preference is in map, append key to list 'activities'
 		categories = {"airsoft" => ["shooting", "action", "airsoft"], "amusementparks" => ["action", "amusement parks", "family activities"], "museums1" => ["museums"], "rafting1" => ["rafting/kayaking"], "climbing1" =>["climbing"],"boating1" => ["boating"], "golf1" => ["golf"], "beaches1" => ["beaches"], "winteractivities1" => ["winter activities"], "skiing1" => ["skiing"], "shooting1" => ["shooting"], "airsoft1" => ["airsoft"], "scubadiving1" => ["scubadiving"], "biking1" => ["biking"], "hiking1" => ["hiking"], "professionalsports1" => ["professionalsports"],"parasailing1" => ["parasailing"], "rice1" => ["rice"], "aquariums" => ["fish", "family activities"], "archery1" => ["archery"], "professionalsports1" => "professional sports", "archery" => ["archery"], "beaches" => ["fish", "beaches", "family activities", "water activities"], "bicyclepaths" => ["biking", "exercise"], "boating" => ["boating", "exercise", "water activities"], "scuba1" => ["scubadiving"], "climbing" => ["exercise", "climbing", "action"], "scuba" => ["water activities", "exercise", "fish", "action", "scuba diving", "nature"], "fishing" => ["water activities", "fish", "family activities", "fishing", "nature"], "golf" => ["golf"], "hiking" => ["hiking", "nature"], "nudist" => ["adult activities", "nudist"], "parasailing" => ["parasailing", "action", "water activities"], "rafting" => ["exercise", "water activities", "rafting/kayaking"], "skiing" => ["action", "winter activities", "skiing"], "skydiving" => ["action"], "waterparks" => ["action", "amusement parks", "family activities", "water activities"], "museums" => ["family activities", "museums"], "sportsteams" => ["professional sports", "family activities"], "eroticmassage" => ["adult activities"], "weddingchappels" => ["wedding"], "venues" => ["wedding", "rice"], "cannabisdispensaries" => ["recreational marijuana"], "adultentertainment" => ["adult activities"], "riceshop" => ["rice"]}
 		activities = []
-		#category1 = params['p1']
-		#category2 = params['p2']
-		#category3 = params['p3']
+		
 		specified_city = params['specified_city']
 		hubs = ["new+york", "los+angeles","houston", "chicago"]
 		if params["preferences"] != nil
@@ -72,6 +72,7 @@ class PreferencesController < ApplicationController
 					hash = JSON.parse(access_token.get("/v2/search?location=#{location}&limit=#{limit}&category_filter=#{activity}").body)	
 				end
 
+				durations = []
 				businesses = hash["businesses"]
 
 					if businesses != nil
@@ -84,7 +85,32 @@ class PreferencesController < ApplicationController
 							city = business["location"]["city"]
 							description = business["snippet_text"]
 
-							Location.create(title:name, url: url, yelp_rating:rating, city:city, description:description)
+
+							#url = URI.parse("https://maps.googleapis.com/maps/api/directions/json?origin=Toronto&destination=Montreal&trafficModel=buestGesskey=AIzaSyAMrSWgcikFHJmslnrC_N25fJ9Wv-988iI")
+							uri = URI("https://maps.googleapis.com/maps/api/directions/json?origin=Houston&destination=Montreal&trafficModel=buestGesskey=AIzaSyDnXBSGrss5gqEwmZ3YrOSdpw6mWzbT2K4")
+							hash = JSON.parse((Net::HTTP.get(uri)))
+							
+							
+
+							if !(hash.has_key?("routes")) 
+								duration = hash["routes"][0]["legs"][0]["duration"]["text"]
+							else 
+								duration = "N/A"
+							end
+
+							#@hash = hash["routes"][3]["legs"]["duration"]["text"]
+
+
+
+
+							#calculate travel time - AIzaSyAMrSWgcikFHJmslnrC_N25fJ9Wv-988iI
+							#/directions/outputFormat?origin=41.43206,-81.38992&destination=39.43206,-81.38992&key=AIzaSyAMrSWgcikFHJmslnrC_N25fJ9Wv-988iI
+
+							#map = OAuth::Consumer.new(GOOGLE_KEY, {:site => "https://maps.googleapis.com", :signature_method => "HMAC-SHA1", :scheme => :query_string})
+
+							#access_token = OAuth::AccessToken.new(map,GOOGLE_KEY)
+							#hash = JSON.parse(access_token.get("/maps/api/directions/json?origin=Toronto&destination=Montreal&trafficModel=buestGesskey=AIzaSyAMrSWgcikFHJmslnrC_N25fJ9Wv-988iI").body)
+							Location.create(title:name, url: url, yelp_rating:rating, city:city, description:description, duration:duration)
 						end
 
 					end	
