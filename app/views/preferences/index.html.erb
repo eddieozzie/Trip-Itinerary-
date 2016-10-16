@@ -13,11 +13,24 @@
 		    text-align: center;
 		}
 		.jumbotron{
+			background-image: url("http://images.fineartamerica.com/images-medium-large-5/houston-texas-skyline-michael-tompsett.jpg");
+			background-size: cover;
+			background-position: bottom;
 		    <!-- insert gradient image here -->
-		    background-color: thistle !important;
+		   
+		}
+		.crop_footer
+		{
+			overflow: hidden;
+		}
+		.crop_footer img
+		{
+			margin: -225px 0 -50px 0;
 		}
 		body{
-		     background-color:  #E8E8E8 !important;
+			
+			background-color: green;
+			background-image: url("../tan_color.jpg")
 		}
 	
 	</style>
@@ -40,88 +53,92 @@
 
 	<p>Please enter your preferences</p>
 	
+	<div class="mid_background">
 
-	<form action="show_results">
-		City: <input type="text" name="specified_city" placeholder="optional">
-		<br>
-		<div class="col">
+		<form action="show_results">
+			City: <input type="text" name="specified_city" placeholder="optional">
 			<br>
+			<div class="col">
+				<br>
 
-			Family Activities: <%=check_box("preferences", "categories", {:multiple => true}, "family activities", nil)%>
-			<br>
-			Museums: <%=check_box("preferences", "categories", {:multiple => true}, "museums", nil)%>
-			<br>
-			Rice: <%=check_box("preferences", "categories", {:multiple => true}, "rice", nil)%>
-			<br>
-			Action: <%=check_box("preferences", "categories", {:multiple => true}, "action", nil)%>
-			<br>
-			Adult Activities: <%=check_box("preferences", "categories", {:multiple => true}, "adult activities", nil)%>
-			<br>
-			Nudist: <%=check_box("preferences", "categories", {:multiple => true}, "nudist", nil)%>
-			<br>
-			Exercise: <%=check_box("preferences", "categories", {:multiple => true}, "exercise", nil)%>
-			<br>
-			Water Activities: <%=check_box("preferences", "categories", {:multiple => true}, "water activities", nil)%>
-			<br>
-			Rafting/Kayaking: <%=check_box("preferences", "categories", {:multiple => true}, "rafting/kayaking", nil)%>
-			<br>
-			Climbing: <%=check_box("preferences", "categories", {:multiple => true}, "climbing", nil)%>
-			<br>
-			Boating: <%=check_box("preferences", "categories", {:multiple => true}, "boating", nil)%>
-			<br>
-			Aquariums: <%=check_box("preferences", "categories", {:multiple => true}, "fish", nil)%>
-			<br>
-			Nature: <%=check_box("preferences", "categories", {:multiple => true}, "nature", nil)%>
-			<br>
-			Golf: <%=check_box("preferences", "categories", {:multiple => true}, "golf", nil)%>
-			<br>
-			Beaches: <%=check_box("preferences", "categories", {:multiple => true}, "beaches", nil)%>
-			<br>
-			Recreational Marijuana: <%=check_box("preferences", "categories", {:multiple => true}, "recreational marijuana", nil)%>
-			<br>
-			Wedding: <%=check_box("preferences", "categories", {:multiple => true}, "wedding", nil)%>
-			<br>
-			Amusement Parks: <%=check_box("preferences", "categories", {:multiple => true}, "amusement parks", nil)%>
-			<br>
-			Winter Activities: <%=check_box("preferences", "categories", {:multiple => true}, "winter activies", nil)%>
-			<br>
-			Skiing: <%=check_box("preferences", "categories", {:multiple => true}, "skiing", nil)%>
-			<br>
-			Shooting: <%=check_box("preferences", "categories", {:multiple => true}, "shooting", nil)%>
-			<br>
-			Airsoft: <%=check_box("preferences", "categories", {:multiple => true}, "airsoft", nil)%>
-			<br>
-			Archery: <%=check_box("preferences", "categories", {:multiple => true}, "archery", nil)%>
-			<br>
-			Scuba Diving: <%=check_box("preferences", "categories", {:multiple => true}, "scuba diving", nil)%>
-			<br>
-			Biking: <%=check_box("preferences", "categories", {:multiple => true}, "biking", nil)%>
-			<br>
-			Hiking: <%=check_box("preferences", "categories", {:multiple => true}, "hiking", nil)%>
-			<br>
-			Professional Sports: <%=check_box("preferences", "categories", {:multiple => true}, "professional sports", nil)%>
-			<br>
-			Parasailing: <%=check_box("preferences", "categories", {:multiple => true}, "parasailing", nil)%>
-			<br>
-		</div>
+				Family Activities: <%=check_box("preferences", "categories", {:multiple => true}, "family activities", nil)%>
+				<br>
+				Museums: <%=check_box("preferences", "categories", {:multiple => true}, "museums", nil)%>
+				<br>
+				Rice: <%=check_box("preferences", "categories", {:multiple => true}, "rice", nil)%>
+				<br>
+				Action: <%=check_box("preferences", "categories", {:multiple => true}, "action", nil)%>
+				<br>
+				Adult Activities: <%=check_box("preferences", "categories", {:multiple => true}, "adult activities", nil)%>
+				<br>
+				Nudist: <%=check_box("preferences", "categories", {:multiple => true}, "nudist", nil)%>
+				<br>
+				Exercise: <%=check_box("preferences", "categories", {:multiple => true}, "exercise", nil)%>
+				<br>
+				Water Activities: <%=check_box("preferences", "categories", {:multiple => true}, "water activities", nil)%>
+				<br>
+				Rafting/Kayaking: <%=check_box("preferences", "categories", {:multiple => true}, "rafting/kayaking", nil)%>
+				<br>
+				Climbing: <%=check_box("preferences", "categories", {:multiple => true}, "climbing", nil)%>
+				<br>
+				Boating: <%=check_box("preferences", "categories", {:multiple => true}, "boating", nil)%>
+				<br>
+				Aquariums: <%=check_box("preferences", "categories", {:multiple => true}, "fish", nil)%>
+				<br>
+				Nature: <%=check_box("preferences", "categories", {:multiple => true}, "nature", nil)%>
+				<br>
+				Golf: <%=check_box("preferences", "categories", {:multiple => true}, "golf", nil)%>
+				<br>
+				Beaches: <%=check_box("preferences", "categories", {:multiple => true}, "beaches", nil)%>
+				<br>
+				Recreational Marijuana: <%=check_box("preferences", "categories", {:multiple => true}, "recreational marijuana", nil)%>
+				<br>
+				Wedding: <%=check_box("preferences", "categories", {:multiple => true}, "wedding", nil)%>
+				<br>
+				Amusement Parks: <%=check_box("preferences", "categories", {:multiple => true}, "amusement parks", nil)%>
+				<br>
+				Winter Activities: <%=check_box("preferences", "categories", {:multiple => true}, "winter activies", nil)%>
+				<br>
+				Skiing: <%=check_box("preferences", "categories", {:multiple => true}, "skiing", nil)%>
+				<br>
+				Shooting: <%=check_box("preferences", "categories", {:multiple => true}, "shooting", nil)%>
+				<br>
+				Airsoft: <%=check_box("preferences", "categories", {:multiple => true}, "airsoft", nil)%>
+				<br>
+				Archery: <%=check_box("preferences", "categories", {:multiple => true}, "archery", nil)%>
+				<br>
+				Scuba Diving: <%=check_box("preferences", "categories", {:multiple => true}, "scuba diving", nil)%>
+				<br>
+				Biking: <%=check_box("preferences", "categories", {:multiple => true}, "biking", nil)%>
+				<br>
+				Hiking: <%=check_box("preferences", "categories", {:multiple => true}, "hiking", nil)%>
+				<br>
+				Professional Sports: <%=check_box("preferences", "categories", {:multiple => true}, "professional sports", nil)%>
+				<br>
+				Parasailing: <%=check_box("preferences", "categories", {:multiple => true}, "parasailing", nil)%>
+				<br>
+			</div>
 
-		<br>
-		<!--<button type="submit" action="show_results">Submit</button>-->
+			<br>
+			<!--<button type="submit" action="show_results">Submit</button>-->
 
-		<div class="container center">
-              <button type="submit" class="btn btn-info" action="show_results">
-                <span class="glyphicon glyphicon-search"></span>
-                Start your vacation!
-                </button>  
-        </div>
+			<div class="container center">
+	              <button type="submit" class="btn btn-info" action="show_results">
+	                <span class="glyphicon glyphicon-search"></span>
+	                Start your vacation!
+	                </button>  
+	        </div>
 
-	</form>
+		</form>
+	</div>
 
 </body>
 
 <footer>
 	<br>
-    <img src="http://images.fineartamerica.com/images-medium-large-5/houston-texas-skyline-michael-tompsett.jpg" width="100%" height="50%" />
+	<div class="crop_footer">
+    	<img src="http://images.fineartamerica.com/images-medium-large-5/houston-texas-skyline-michael-tompsett.jpg" width="100%" height="50%"/>
+    </div>
 </footer>
 
 </html>
