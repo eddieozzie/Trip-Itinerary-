@@ -1,6 +1,6 @@
 # Trip-Itinerary
 This web app was developed in under 48 hours at HackRice, Rice University's hackathon, in the fall of 2016. 
-*Tools used: Ruby on Rails, HTML/CSS/JavaScript, Yelp API, and Google Maps API
+* Tools used: Ruby on Rails, HTML/CSS/JavaScript, Yelp API, and Google Maps API
 
 [DevPost Link](https://devpost.com/software/your-ideal-trip)
 
